@@ -1,0 +1,116 @@
+100 of the most important SLURM (Simple Linux Utility for Resource
+Management) commands that are commonly used in High-Performance
+Computing (HPC) environments:
+1-10: Job Submission
+1. sbatch <script>: Submit a job script to the scheduler.
+2. salloc: Allocate resources for an interactive job.
+3. srun <command>: Run a command or program on the allocated nodes.
+4. scancel <jobid>: Cancel a running or queued job.
+5. scontrol show job <jobid>: Show detailed information about a specific job.
+6. scontrol requeue <jobid>: Requeue a job that has failed or been canceled.
+7. scontrol update jobid=<jobid> state=running: Update the state of a job.
+8. scontrol hold <jobid>: Put a hold on a job to prevent it from starting.
+9. scontrol release <jobid>: Release a held job.
+10. squeue: View a list of currently running and queued jobs.
+11-20: Job Monitoring
+11. squeue -u <username>: Show all jobs for a specific user.
+12. squeue --start: Display the expected start time of jobs.
+13. squeue -p <partition>: View jobs for a specific partition.
+14. squeue --state=<state>: Display jobs in a specific state (e.g., running, pending).
+15. squeue -l: Show detailed job information in the queue.
+16. squeue -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %R": Customize the output of squeue.
+17. scontrol show node <nodename>: Show details about a specific node.
+18. scontrol show partition: Display the configuration of SLURM partitions.
+19. scontrol show reservation: Show details about resource reservations.
+20. scontrol show config: Display SLURM configuration parameters.
+21-30: Resource Management
+21. sinfo: Display information about available resources, partitions, and nodes.
+22. sinfo -N: Display node-level information.
+23. sinfo -p <partition>: Show information about a specific partition.
+24. sinfo -t <state>: Show nodes in a specific state (e.g., idle, down).
+25. sinfo --long: Show detailed information about nodes and partitions.
+26. scontrol update NodeName=<node> State=DOWN: Mark a node as down.
+27. scontrol update NodeName=<node> State=RESUME: Mark a node as available for jobs.
+28. scontrol show topology: Display the topology of nodes.
+29. scontrol show lic: Display available licenses and their usage.
+30. scontrol reconfig: Reload the SLURM configuration without restarting.
+31-40: Job Arrays
+31. sbatch --array=1-10 <script>: Submit a job array with 10 tasks.
+
+32. squeue --array: Display job arrays in the queue.
+33. scancel <jobid>_<arrayindex>: Cancel a specific task in a job array.
+34. scontrol show job <jobid>_<arrayindex>: Show details for a specific task in a job array.
+35. sbatch --array=1-100%10 <script>: Submit a job array with 100 tasks, limiting 10 running simultaneously.
+36. scontrol update jobid=<jobid> arraytask=<index>: Update the state of a specific array task.
+37. sbatch --dependency=afterok:<jobid>_<index>: Make an array job task dependent on another task.
+38. sbatch --array=1-10%2 <script>: Submit a job array of 10 tasks with a maximum of 2 running at once.
+39. sbatch --array=1,2,5 <script>: Submit specific array tasks.
+40. scontrol release <jobid>_<index>: Release a specific array task.
+41-50: Job Dependencies
+41. sbatch --dependency=after:<jobid>: Submit a job dependent on another job finishing.
+42. sbatch --dependency=afterok:<jobid>: Submit a job that runs only if the previous job was successful.
+43. sbatch --dependency=afternotok:<jobid>: Submit a job that runs only if the previous job failed.
+44. sbatch --dependency=afterany:<jobid>: Submit a job that runs after another job finishes, regardless of its outcome.
+45. squeue -j <jobid> --states=all: Display the state of a dependent job.
+46. scontrol hold <jobid>: Hold a job that is dependent on another job.
+47. scontrol release <jobid>: Release a dependent job.
+48. sbatch --dependency=singleton <script>: Submit a job that won't run until all previous jobs of the same name have completed.
+49. squeue --start --dependency=after:<jobid>: View the start time of jobs dependent on another job.
+50. scontrol show job --dependency=<jobid>: Show job dependencies.
+51-60: Time and Resource Limits
+51. sbatch --time=<time>: Set the maximum wall time for a job (e.g., -- time=02:00:00).
+52. srun --time=<time>: Set a time limit for a command or interactive session.
+53. scontrol show job --details <jobid>: View detailed resource usage for a specific job.
+54. sinfo --time: Display time limits for partitions and jobs.
+55. sbatch --cpus-per-task=<n>: Request a specific number of CPUs per task.
+56. sbatch --mem=<size>: Request a specific amount of memory for a job (e.g., -- mem=4G).
+57. squeue --sort=T: Sort the queue by job time limits.
+58. sbatch --exclusive: Request exclusive use of nodes for a job.
+59. sbatch --ntasks=<n>: Specify the number of tasks for a job.
+
+60. srun --ntasks-per-node=<n>: Specify the number of tasks per node for an srun command.
+61-70: Job Accounting and Logs
+61. sacct: Show job accounting data for completed jobs.
+62. sacct -j <jobid>: Display detailed accounting information for a specific job.
+63. sacct -u <username>: View job accounting information for a specific user.
+64. sacct -S <starttime>: Show job accounting information since a specific time.
+65. sacct -o <format>: Customize the output format of job accounting data.
+66. sstat -j <jobid>: Display real-time job statistics for a running job.
+67. sstat --format=<format>: Customize the output format of sstat data.
+68. scontrol show job history=<jobid>: Display the history of a specific job.
+69. seff <jobid>: Show efficiency statistics for a completed job.
+70. sreport: Generate reports on job resource usage and SLURM accounting data.
+71-80: Advanced Resource Requests
+71. sbatch --gres=<resource>: Request generic resources (e.g., GPUs) for a job.
+72. srun --gres=<resource>: Request GPUs or other resources for an interactive job.
+73. sbatch --constraint=<feature>: Specify hardware constraints for a job (e.g., -- constraint="GPU").
+74. sbatch --qos=<qos>: Submit a job under a specific Quality of Service (QoS) class.
+75. sbatch --partition=<partition>: Submit a job to a specific partition.
+76. salloc --ntasks=<n>: Request a specific number of tasks for an interactive job.
+77. sbatch --nodes=<n>: Request a specific number of nodes for a job.
+78. sbatch --hint=compute_bound: Optimize job scheduling for CPU-intensive tasks.
+79. sbatch --hint=memory_bound: Optimize job scheduling for memory-intensive tasks.
+80. sbatch --ntasks-per-core=<n>: Specify the number of tasks per CPU core.
+81-90: Job Priority and Scheduling
+81. scontrol show priority <jobid>: Display the priority of a job.
+82. sprio -u <username>: Show the priority of all jobs for a specific user.
+83. sprio -p <partition>: Show the priority of jobs in a specific partition.
+84. sbatch --priority=<value>: Set the priority of a submitted job.
+85. squeue -o "%.18i %.9P %.8j %.8u %.2t %.10M %.6D %p": Customize squeue output to display job priorities.
+86. sbatch --nice=<value>: Lower the priority of a job using a nice value.
+87. sbatch --overcommit: Allow more tasks to be scheduled than available resources.
+88. scontrol update jobid=<jobid> priority=<value>: Manually update the priority of a job.
+89. scontrol show topology: Display job scheduling topology.
+90. sbatch --share: Allow a job to share resources with other jobs.
+91-100: SLURM Daemons and Configuration
+91. scontrol reconfigure: Apply changes to SLURM configuration without restarting.
+
+92. scontrol shutdown: Shut down the SLURM controller.
+93. scontrol ping: Check if SLURM is responsive.
+94. scontrol show config: Display the current SLURM configuration.
+95. scontrol show daemons: Show all SLURM daemons.
+96. scontrol update partition=<partition> state=UP/DOWN: Change the state of a partition.
+97. scontrol update node=<node> state=DOWN: Take a node offline.
+98. scontrol update node=<node> state=RESUME: Bring a node back online.
+99. scontrol show jobstep <jobid>: Display information about job steps.
+100.scontrol show reservations: Show current reservations.
