@@ -1,0 +1,158 @@
+%P — Partition name
+Displays the partition(s) for the node(s).
+%A — Availability of the partition
+Displays whether the partition is available or down (e.g., up, down).
+%T — Node state
+Shows the state of the node, such as idle, allocated, draining, down, etc.
+%D — Number of nodes in a partition
+Displays the total number of nodes in the partition.
+%N — Node list
+Displays the names of nodes.
+%C — CPU information
+Shows the CPU status (e.g., 1/2 means 1 CPU used out of 2 total).
+%m — Memory information
+Displays memory usage, often shown in a "used/total" format (e.g., 4G/16G).
+%l — Time limit for jobs
+Displays the time limit for jobs in the partition (e.g., 24:00:00).
+%R — Reason for node state
+Displays the reason for the node being in its current state, such as DRAINING or ALLOCATED.
+%S — Node features
+Displays specific node features, such as GPU or special hardware.
+%L — Node load
+Displays the load on the node.
+%b — Total number of CPUs available for jobs
+Shows the total CPUs available on the node.
+######################################################################################################################################################
+Valid type specifications include:
+
+%all
+Print all fields available for this data type with a vertical bar separating each field.
+
+%a
+State/availability of a partition.
+
+%A
+Number of nodes by state in the format "allocated/idle". Do not use this with a node state option ("%t" or "%T") or the different node states will be placed on separate lines.
+
+%b
+Features currently active on the nodes, also see %f.
+
+%B
+The max number of CPUs per node available to jobs in the partition.
+
+%c
+Number of CPUs per node.
+
+%C
+Number of CPUs by state in the format "allocated/idle/other/total". Do not use this with a node state option ("%t" or "%T") or the different node states will be placed on separate lines.
+
+%d
+Size of temporary disk space per node in megabytes.
+
+%D
+Number of nodes.
+
+%e
+The total memory, in MB, currently free on the node as reported by the OS. This value is for informational use only and is not used for scheduling.
+
+%E
+The reason a node is unavailable (down, drained, or draining states).
+
+%f
+Features available the nodes, also see %b.
+
+%F
+Number of nodes by state in the format "allocated/idle/other/total". Note the use of this format option with a node state format option ("%t" or "%T") will result in the different node states being be reported on separate lines.
+
+%g
+Groups which may use the nodes.
+
+%G
+Generic resources (gres) associated with the nodes.
+
+%h
+Print the OverSubscribe setting for the partition.
+
+%H
+Print the timestamp of the reason a node is unavailable.
+
+%i
+If a node is in an advanced reservation print the name of that reservation.
+
+%I
+Partition job priority weighting factor.
+
+%l
+Maximum time for any job in the format "days-hours:minutes:seconds"
+
+%L
+Default time for any job in the format "days-hours:minutes:seconds"
+
+%m
+Size of memory per node in megabytes.
+
+%M
+PreemptionMode.
+
+%n
+List of node hostnames.
+
+%N
+List of node names.
+
+%o
+List of node communication addresses.
+
+%O
+CPU load of a node as reported by the OS.
+
+%p
+Partition scheduling tier priority.
+
+%P
+Partition name followed by "*" for the default partition, also see %R.
+
+%r
+Only user root may initiate jobs, "yes" or "no".
+
+%R
+Partition name, also see %P.
+
+%s
+Maximum job size in nodes.
+
+%S
+Allowed allocating nodes.
+
+%t
+State of nodes, compact form.
+
+%T
+State of nodes, extended form.
+
+%u
+Print the user name of who set the reason a node is unavailable.
+
+%U
+Print the user name and uid of who set the reason a node is unavailable.
+
+%v
+Print the version of the running slurmd daemon.
+
+%V
+Print the cluster name if running in a federation.
+
+%w
+Scheduling weight of the nodes.
+
+%X
+Number of sockets per node.
+
+%Y
+Number of cores per socket.
+
+%Z
+Number of threads per core.
+
+%z
+Extended processor information: number of sockets, cores, threads (S:C:T) per node.
